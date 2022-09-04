@@ -3,10 +3,12 @@ package com.microservice.microserviceproject.SERVICEIMPL;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.microservice.microserviceproject.ENTITY.Manager;
+import com.microservice.microserviceproject.PAYLOADS.Managerdto;
 import com.microservice.microserviceproject.REPOSITORY.ManagerRepo;
 import com.microservice.microserviceproject.SERVICE.ManagerService;
 
@@ -15,13 +17,17 @@ public class ManagerServiceImpl implements ManagerService {
     @Autowired
     private ManagerRepo repo;
 
+    @Autowired
+    ModelMapper mapper;
+
     // creating all manager
     @Override
     public Manager createmanager(Manager man) {
-        Manager savedmanager = this.repo.save(man);
-        return savedmanager;
+       Manager createdmanager=this.repo.save(man);
+        return createdmanager;
     }
-
+    
+    
     // updating the manager
     @Override
     public Manager updatemanager(Manager man, int id) {
@@ -114,5 +120,24 @@ public class ManagerServiceImpl implements ManagerService {
                 .collect(Collectors.toList());
         return commonmanager;
     }
+
+    //mapping managerdto to manager
+
+    public Managerdto dtoTomanager(Manager man1)
+    {
+        Managerdto mandto=this.mapper.map(man1, Managerdto.class);
+        return mandto;
+
+    }
+
+    public Manager managerTodto (Managerdto dto)
+    {
+        Manager man=this.mapper.map(dto, Manager.class);
+
+        return man;
+    }
+
+  
+
 
 }
