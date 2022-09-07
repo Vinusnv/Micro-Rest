@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch demo",
+            "request": "launch",
+            "mainClass": "com.microservice.microserviceproject.ENTITY.demo",
+            "projectName": "microserviceproject"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-MicroserviceprojectApplication<microserviceproject>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
